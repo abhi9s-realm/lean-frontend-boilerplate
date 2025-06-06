@@ -1,0 +1,50 @@
+.errorContainer {
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.errorTitle {
+  color: #dc2626;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.errorMessage {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.retryButton {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retryButton:hover {
+  background-color: #1d4ed8;
+}
+
+@media (prefers-color-scheme: dark) {
+  .errorContainer {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .errorTitle {
+    color: #ef4444;
+  }
+
+  .retryButton:hover {
+    background-color: #3b82f6;
+  }
+}

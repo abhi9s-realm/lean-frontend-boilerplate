@@ -1,0 +1,26 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Getting Started with React and Vite",
+      "body": "Learn how to set up a modern React application with Vite..."
+    },
+    {
+      "id": 2,
+      "title": "TypeScript Best Practices",
+      "body": "Explore TypeScript features and patterns for better code..."
+    },
+    {
+      "id": 3,
+      "title": "API Integration in React",
+      "body": "Learn how to integrate APIs in your React application..."
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "postId": 1,
+      "text": "Great article!"
+    }
+  ]
+}
