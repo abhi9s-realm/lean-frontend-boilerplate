@@ -16,7 +16,6 @@ export function useApi<T>(endpoint: string) {
     
     const fetchData = async () => {
       try {
-        console.log(`Fetching from: ${env.apiUrl}${endpoint}`);
         const response = await fetch(`${env.apiUrl}${endpoint}`, {
           signal: controller.signal,
           headers: {
@@ -31,9 +30,11 @@ export function useApi<T>(endpoint: string) {
         const json = await response.json();
         setData(json);
       } catch (err) {
-        setError({
-          message: err instanceof Error ? err.message : 'An error occurred',
-        });
+        const error = err instanceof Error ? err : new Error('An error occurred');
+        setError(error);
+        if (env.debug) {
+          console.error('API Error:', error);
+        }
       } finally {
         setLoading(false);
       }

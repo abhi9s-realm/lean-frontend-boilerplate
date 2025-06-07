@@ -38,8 +38,7 @@ npm run dev
 │   │   ├── ErrorBoundary.tsx
 │   │   └── Loading.tsx
 │   ├── config/        # App configuration
-│   │   ├── config.ts
-│   │   └── env.ts
+│   │   └── config.ts      # Environment-specific configuration
 │   ├── hooks/         # Custom React hooks
 │   │   └── useApi.ts
 │   ├── pages/         # Application routes
@@ -83,12 +82,23 @@ npm run preview
 ## Configuration
 
 ### Environment Variables
-Create `.env.development` and `.env.production` files:
+
+Configuration is managed through `src/config/config.ts` which provides environment-specific defaults and type-safe access to configuration values.
+
+Available environment variables:
 ```env
-VITE_API_URL=http://localhost:3000
-VITE_APP_NAME=Your App Name
-VITE_ENABLE_DEBUG=true
+# Application Settings
+VITE_API_URL         # API endpoint URL
+VITE_APP_NAME        # Application name
+VITE_APP_VERSION     # Application version
+
+# Development Settings
+VITE_DEV_PORT       # Development server port
+VITE_DEV_HOST       # Development server host
+VITE_CACHE_TTL      # Cache time-to-live in seconds
 ```
+
+All variables are optional and have sensible defaults defined in `config.ts`. The configuration automatically switches between development and production modes based on the build environment.
 
 ### ESLint & Prettier
 Configuration is in `package.json` for simplicity:
@@ -101,10 +111,25 @@ Configuration is in `package.json` for simplicity:
 - React Testing Library for component testing
 - Jest DOM for DOM assertions
 
+Example test:
+```typescript
+// src/components/__tests__/Loading.test.tsx
+describe('Loading component', () => {
+  it('renders with default props', () => {
+    render(<Loading />);
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(screen.getByTestId('loading-spinner')).toHaveClass('medium');
+  });
+
+  it('renders with custom size and message', () => {
+    render(<Loading size="small" message="Please wait" />);
+    expect(screen.getByText('Please wait')).toBeInTheDocument();
+    expect(screen.getByTestId('loading-spinner')).toHaveClass('small');
+  });
+});
+
 ### Styling
 - CSS Modules for component-scoped styles
 - Global styles in `src/styles/global.css`
 - Dark mode support using `prefers-color-scheme`
 - CSS variables for theming
-
----

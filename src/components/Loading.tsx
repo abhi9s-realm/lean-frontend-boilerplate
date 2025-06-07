@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from '@/styles/Loading.module.css';
 
 interface LoadingProps {
@@ -6,11 +6,18 @@ interface LoadingProps {
   message?: string;
 }
 
-const Loading: React.FC<LoadingProps> = ({ size = 'medium', message = 'Loading...' }) => {
+const Loading: FC<LoadingProps> = ({ 
+  size = 'medium', 
+  message = 'Loading...' 
+}) => {
   return (
     <div className={`${styles.loadingContainer} ${styles[size]}`}>
-      <div className={styles.spinner}></div>
-      {message && <p className={styles.message}>{message}</p>}
+      <div 
+        className={styles.spinner}
+        data-testid="loading-spinner"
+        data-size={size}
+      />
+      <p className={styles.message}>{message}</p>
     </div>
   );
 };
